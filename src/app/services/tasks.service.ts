@@ -30,6 +30,7 @@ export class TasksService {
 
 
   remove(task: Task, index: number) {
+    this.tasksList = this.tasksList.filter((e, i) => e !== task || i !== index);
     this.tasksListObs.next(this.tasksList);
   }
   done(task: Task, index: number) {

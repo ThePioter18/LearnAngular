@@ -1,0 +1,31 @@
+<div>
+  <nav>
+    <ul>
+      <h4> LearnAngular </h4>
+
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="about/48">About</a></li>
+      <!-- <li><a routerLink="todo">ToDo</a></li> -->
+    </ul>
+
+  </nav>
+
+  <div class="container">
+    <!-- Miejsce na dodawanie tasków -->
+    <app-add-task></app-add-task>
+  </div>
+
+  <div class="container">
+    <div>
+      <!-- Lista zadań -->
+      <app-todo-task></app-todo-task>
+
+    </div>
+
+    <div>
+      <!-- Wykonane zadania -->
+      <app-done-task></app-done-task>
+    </div>
+  </div>
+</div>
+<!-- <app-home></app-home> -->

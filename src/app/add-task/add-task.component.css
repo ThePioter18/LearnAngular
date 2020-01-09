@@ -1,0 +1,20 @@
+#header-input {
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+input {
+
+  border: 0;
+  padding: 1em;
+  margin-bottom: 0.2em;
+  display: inline;
+
+}
+
+.underline {
+  border-bottom: 1px dashed rgb(160, 114, 114);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+}

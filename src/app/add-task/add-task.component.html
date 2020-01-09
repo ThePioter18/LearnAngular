@@ -1,0 +1,40 @@
+<form (ng-submit)="add()" #f="ngForm">
+
+  <h4 id="header-input"> Dodaj zadanie na dziś</h4>
+
+  <!-- Grid row -->
+  <div class="form-row" [@newTask]='newTask'>
+    <!-- Grid column -->
+    <div class="col-auto">
+      <!-- Material input -->
+      <div class="md-form">
+
+        <!-- Miejsce na dodawanie tasków -->
+        <input name="newTask" type="text" placeholder="Text.." class="form-control" id="name" required maxlength="30"
+          minlength="3" [(ngModel)]="newTask" #task="ngModel">
+
+        <div *ngIf="task.invalid && (task.dirty || task.touched)" class="alert alert-danger">
+          <div *ngIf="task.errors.required">
+            Nazwa jest wymagana.
+          </div>
+          <div *ngIf="task.errors.minlength">
+            Nazwa nie może być dłuższa niż 30 znaków.
+            <div class="underline "></div>
+          </div>
+          <div *ngIf="task.errors.minlength">
+            Nazwa musi mieć co najmniej 3 znaki.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-auto">
+      <button class="btn btn-success" (click)="add()" type="submit" [disabled]="!f.form.valid">Dodaj</button>
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+</form>

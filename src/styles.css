@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+
+  padding: 3em;
+  background-image: linear-gradient(45deg, #9a87eb 0%, #c2b7f3 99%, #c2b7f3 100%);
+
+  color: rgb(238, 238, 238) !important;
+}
+
+ul {
+  list-style-type: none;
+  padding-top: 7px;
+}
+
+ul li a {
+  font-size: 1.5em;
+}
+
+a {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+.container {
+  padding: 0 1rem;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  background: #555;
+  color: #fff;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #666;
+}

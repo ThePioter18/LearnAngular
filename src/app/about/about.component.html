@@ -1,0 +1,16 @@
+<strong>
+  Zestawienie wszystkich wykonanych zadań.
+</strong>
+<br><br>
+<ul>
+  <li *ngFor="let done of tasksDone">
+    {{ done.name }}
+  </li>
+</ul>
+
+<a href="" (click)="sendMeHome()">
+  <br>
+  <br>
+  <h4>&#8630;</h4>
+  <strong>Powrót do menu. </strong>
+</a>

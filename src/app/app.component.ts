@@ -9,7 +9,4 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
 
-  // Cała funkcjonalność przeniosła się do tasks.service.ts
-
-
 }

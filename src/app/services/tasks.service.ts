@@ -18,14 +18,10 @@ export class TasksService {
       { name: 'Sprzątanie', created: new Date() },
       { name: 'Nauka Angulara', created: new Date() },
       { name: 'Podlewanie kwiatów', created: new Date() },
-      { name: 'Zakupy', created: new Date()}
+      { name: 'Zakupy', created: new Date() }
     ];
     this.tasksListObs.next(this.tasksList);
   }
-
-  // changeGoal(tasksList) {
-  //   this.tasksListObs.next(tasksList);
-  // }
 
   add(task: Task) {
     this.tasksList.push(task);
@@ -34,14 +30,6 @@ export class TasksService {
 
 
   remove(task: Task, index: number) {
-    this.tasksList = this.tasksList.filter( (e, i) => e !== task || i !== index);
-   // każdy element oznaczony jak 'e' i sprawdzamy czy jest różny
-   // od tego taska co przechodzi w tablicy, jesli warunek sprawdzony bedzie mial 'true'
-   // to filtr zachowa elementy, jesli 'false' to usunie.
-   // zachowane elementy tworzą spowrotem nową tablicę,
-   // więc
-   // najlepiej przypisac do naszej tablicy tą nową tablice stworzona przez filter
-   // this.tasksList.splice(index, 1);
     this.tasksListObs.next(this.tasksList);
   }
   done(task: Task, index: number) {

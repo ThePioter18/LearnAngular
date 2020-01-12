@@ -11,6 +11,8 @@ import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { DoneTaskComponent } from './done-task/done-task.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { CheckedDirective } from './shared/checked.directive';
+import { DateDirective } from './shared/date.directive';
 
 const routes: Routes = [
   {
@@ -37,7 +39,9 @@ const routes: Routes = [
     TodoTaskComponent,
     DoneTaskComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    CheckedDirective,
+    DateDirective
   ],
   imports: [
     RouterModule.forRoot(

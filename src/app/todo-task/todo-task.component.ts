@@ -55,6 +55,7 @@ export class TodoTaskComponent implements OnInit {
   }
   done(task: Task, index: number) {
     // this.emitDone.emit(task);
+    task.end = new Date();
     this.tasksService.done(task, index);
   }
   getColor(): string {

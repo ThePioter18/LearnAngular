@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CheckedDirective } from './shared/checked.directive';
 import { DateDirective } from './shared/date.directive';
+import { TransformTaskPipe } from './shared/transform-task.pipe';
+import { SortNamePipe } from './shared/sort-name.pipe';
 
 const routes: Routes = [
   {
@@ -41,7 +43,9 @@ const routes: Routes = [
     HomeComponent,
     AboutComponent,
     CheckedDirective,
-    DateDirective
+    DateDirective,
+    TransformTaskPipe,
+    SortNamePipe
   ],
   imports: [
     RouterModule.forRoot(

@@ -15,12 +15,12 @@ export class DateDirective {
 
   // metody
   @HostListener('mouseenter')
-  mouseenter(eventDate: Event) {
+  mouseenter() {
     this.paragraph.innerHTML = this.date.toLocaleString();
     this.renderer.appendChild(this.el.nativeElement, this.paragraph);
   }
   @HostListener('mouseleave')
-  mouseleave(eventDate: Event) {
+  mouseleave() {
     this.renderer.removeChild(this.el.nativeElement, this.paragraph);
   }
 }

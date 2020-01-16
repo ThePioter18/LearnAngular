@@ -1,9 +1,9 @@
 <ng-container *ngIf="tasksList.length > 0; else noTask">
-  <p [ngStyle]="{background: getColor()}">Zadanie do wykonania: {{tasksList.length}}</p>
+  <p [ngStyle]="{background: getColor()}">Zadania do wykonania: {{tasksList.length}}</p>
   <ul [@tasksList]='tasksList.length'>
-    <li appDate [date]="task.created" *ngFor="let task of tasksList; let i = index let odd = odd"
+    <li appDate [date]="task.created" *ngFor="let task of tasksList | sortName; let i = index let odd = odd"
       [ngClass]="{ 'odd-li': odd===true, 'last-li':tasksList.length===1 }">
-      Zadanie {{i+1}}. Do wykonania: {{task.name}}
+      Zadanie {{i+1}}. Do wykonania: {{task.name | transformTask: '!'}}
       <button type="button" class="btn btn-danger" (click)="remove(task, i)"> Usuń</button>
       <button type="button" class="btn btn-success" (click)="done(task, i)">Zrobione</button>
     </li>

@@ -43,19 +43,18 @@ export class TodoTaskComponent implements OnInit {
 
   constructor(private tasksService: TasksService) {
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
-      this.tasksList = tasks;
+      this.tasksList = tasks.filter(t => t.isDone === false);
     });
   }
 
   ngOnInit() { }
 
-  remove(task: Task, index: number) {
+  remove(task: Task) {
     // this.emitRemove.emit(task);
-    this.tasksService.remove(task, index);
+    this.tasksService.remove(task);
   }
   done(task: Task, index: number) {
     // this.emitDone.emit(task);
-    task.end = new Date();
     this.tasksService.done(task, index);
   }
   getColor(): string {

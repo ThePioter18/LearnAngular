@@ -15,10 +15,14 @@ export class AboutComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private tasksService: TasksService) {
     this.route.params.subscribe(res => console.log(res.id));
+
+    this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
+      this.tasksDone = tasks.filter(t => t.isDone === true);
+    });
   }
 
   ngOnInit() {
-    this.tasksService.getTasksDoneObs().subscribe(res => this.tasksDone = res);
+    // this.tasksService.getTasksListObs().subscribe(res => this.tasksDone = res);
   }
 
   sendMeHome() {

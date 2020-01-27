@@ -44,7 +44,7 @@ export class AddTaskComponent implements OnInit {
 
   add() {
     // this.emitTask.emit(this.newTask);
-    const task: Task = ({ name: this.newTask, created: new Date() });
+    const task: Task = ({ name: this.newTask, created: new Date().toLocaleString(), isDone: false });
     this.tasksService.add(task);
     this.newTask = ''; // czyszczenie pola
   }

@@ -1,50 +1,49 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../models/task';
+import { HttpService } from './http.service';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
-  private tasksList: Array<Task> = [];
-  private tasksDone: Array<Task> = [];
-
   private tasksListObs = new BehaviorSubject<Array<Task>>([]);
-  private tasksDoneObs = new BehaviorSubject<Array<Task>>([]);
 
-  constructor() {
-    this.tasksList = [
-      { name: 'Sprzątanie', created: new Date() },
-      { name: 'Nauka Angulara', created: new Date() },
-      { name: 'Podlewanie kwiatów', created: new Date() },
-      { name: 'Zakupy', created: new Date() }
+  constructor(private httpService: HttpService) {
+    const tasksList = [
+      { name: 'Sprzątanie', created: new Date().toLocaleString(), isDone: false },
+      { name: 'Nauka Angulara', created: new Date().toLocaleString(), isDone: false },
+      { name: 'Podlewanie kwiatów', created: new Date().toLocaleString(), isDone: false },
+      { name: 'Zakupy', created: new Date().toLocaleString(), isDone: false },
+      { name: 'Nauka JavaScript', created: new Date().toLocaleString(), end: new Date().toLocaleString(), isDone: true }
+
     ];
-    this.tasksListObs.next(this.tasksList);
+    this.tasksListObs.next(tasksList);
   }
 
   add(task: Task) {
-    this.tasksList.push(task);
-    this.tasksListObs.next(this.tasksList);
+    const list = this.tasksListObs.getValue();
+    list.push(task);
+    this.tasksListObs.next(list);
   }
 
-
-  remove(task: Task, index: number) {
-    this.tasksList = this.tasksList.filter((e, i) => e !== task || i !== index);
-    this.tasksListObs.next(this.tasksList);
+  remove(task: Task) {
+    const list = this.tasksListObs.getValue().filter(e => e !== task);
+    this.tasksListObs.next(list);
   }
+
   done(task: Task, index: number) {
-    this.tasksDone.push(task); // dodajemy zrobione zadanie do tablicy 'task'
-    this.remove(task, index); // Po dodaniu do listy zadan zrobionych, usuwamy zad ze starej listy
-    this.tasksDoneObs.next(this.tasksDone);
+    task.end = new Date().toLocaleString();
+    task.isDone = true;
+    const list = this.tasksListObs.getValue();
+    this.tasksListObs.next(list);
   }
 
   // metody dostępu do powyższych subjectów
   getTasksListObs(): Observable<Array<Task>> {
     return this.tasksListObs.asObservable();
-  }
-  getTasksDoneObs(): Observable<Array<Task>> {
-    return this.tasksDoneObs.asObservable();
   }
 
 }

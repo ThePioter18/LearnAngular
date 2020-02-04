@@ -1,0 +1,21 @@
+{
+  "tasks": [{
+      "id": 0,
+      "name": "Nauka Angulara",
+      "created": "3.02.2020, 19:37:23",
+      "isDone": false
+    },
+    {
+      "id": 1,
+      "name": "Zakupy",
+      "created": "3.02.2020, 19:37:28",
+      "isDone": false
+    },
+    {
+      "id": 2,
+      "name": "Learn REST API",
+      "created": "27.01.2020, 18:20:10",
+      "isDone": false
+    }
+  ]
+}

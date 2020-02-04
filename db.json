@@ -1,9 +1,0 @@
-{
-  "tasks": [{
-    "id": 1,
-    "name": "Learn REST API",
-    "created": "27-01-2020",
-    "end": "",
-    "isDone": "false"
-  }]
-}

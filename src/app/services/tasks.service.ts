@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../models/task';
 import { HttpService } from './http.service';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,12 @@ export class TasksService {
   private tasksListObs = new BehaviorSubject<Array<Task>>([]);
 
   constructor(private httpService: HttpService) {
-    const tasksList = [
-      { name: 'Sprzątanie', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Nauka Angulara', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Podlewanie kwiatów', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Zakupy', created: new Date().toLocaleString(), isDone: false },
-      { name: 'Nauka JavaScript', created: new Date().toLocaleString(), end: new Date().toLocaleString(), isDone: true }
 
-    ];
-    this.tasksListObs.next(tasksList);
+    this.httpService.getTasks().subscribe(list => {
+      this.tasksListObs.next(list);
+      console.log(list);
+    });
+
   }
 
   add(task: Task) {
@@ -46,4 +42,7 @@ export class TasksService {
     return this.tasksListObs.asObservable();
   }
 
+  saveTasksInDb() {
+    this.httpService.saveTasks(this.tasksListObs.getValue());
+  }
 }

@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:proxy": "ng serve --proxy-config proxy.conf.json"
+    "mock:server": "json-server --watch data.json",
+    "start:proxy": "ng serve --proxy-config proxy.conf.json",
+    "start:proxy:mock:server": "concurrently — kill-others \"npm run mock:server\" \"npm run start:proxy\""
   },
   "private": true,
   "dependencies": {
@@ -23,6 +25,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "express": "^4.17.1",
+    "json-server": "^0.15.1",
     "mongodb": "^3.5.2",
     "mongoose": "^5.8.9",
     "rxjs": "~6.4.0",
@@ -39,6 +42,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.2.1",
+    "concurrently": "^5.1.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",

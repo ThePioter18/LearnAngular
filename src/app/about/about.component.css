@@ -1,0 +1,21 @@
+.container-card {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 60px;
+
+}
+
+.about-title {
+  text-align: center;
+  margin-top: 30px;
+}
+
+mat-card {
+  padding: 42px;
+  text-align: center;
+}
+
+mat-card-header {
+  display: inline;
+}

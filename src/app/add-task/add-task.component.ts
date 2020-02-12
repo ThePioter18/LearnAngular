@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -32,21 +33,40 @@ import { trigger, style, transition, animate, keyframes, query, stagger } from '
 })
 export class AddTaskComponent implements OnInit {
 
-  newTask: string;
-  // @Output()
-  // emitTask = new EventEmitter<string>();
+  addForm: FormGroup;
 
   constructor(private tasksService: TasksService) {
   }
 
   ngOnInit() {
+    this.addForm = this.initForm();
+  }
+
+  initForm() {
+    return new FormGroup({
+      taskName: new FormArray([new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])])
+    });
   }
 
   add() {
-    // this.emitTask.emit(this.newTask);
-    const task: Task = ({ name: this.newTask, created: new Date().toLocaleString(), isDone: false });
-    this.tasksService.add(task);
-    this.newTask = ''; // czyszczenie pola
+    const tasksList = this.createTaskList();
+    this.tasksService.add(tasksList);
+    this.addForm = this.initForm();
+  }
+
+  createTaskList(): Array<Task> {
+    const tasksList = new Array<Task>();
+    const taskArr = this.addForm.get('taskName').value as [string];
+    taskArr.forEach(taskName => {
+      const task = { name: taskName, created: new Date().toLocaleString(), isDone: false };
+      tasksList.push(task);
+    });
+    return tasksList;
+  }
+
+  addField() {
+    const arr = this.addForm.get('taskName') as FormArray;
+    arr.push(new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
   }
 
 }

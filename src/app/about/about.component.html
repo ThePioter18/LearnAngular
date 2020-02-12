@@ -1,16 +1,50 @@
-<strong>
-  Zestawienie wszystkich wykonanych zadań.
-</strong>
-<br><br>
-<ul>
-  <li *ngFor="let done of tasksDone">
-    {{ done.name }}
-  </li>
-</ul>
+<ng-container *ngIf="tasksDone.length > 0; else noTaskDone">
+
+  <div class="about-title">
+    <h5>
+      Zestawienie wszystkich wykonanych zadań.
+    </h5>
+  </div>
+
+  <ul class="container-card">
+    <li *ngFor="let done of tasksDone">
+      <mat-card>
+
+        <mat-card-header>
+
+          <mat-card-title>{{ done.name }}</mat-card-title>
+
+        </mat-card-header>
+
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+
+        <mat-card-subtitle>Zadanie zaplanowano:</mat-card-subtitle>
+
+        <mat-card-content>{{done.created}}</mat-card-content>
+
+        <mat-card-subtitle>Zadanie wykonano:</mat-card-subtitle>
+
+        <mat-card-content>{{done.end}}</mat-card-content>
+
+
+      </mat-card>
+      <br>
+
+    </li>
+  </ul>
+
+</ng-container>
+
+<ng-template #noTaskDone>
+  <br>
+  <p>Brak wykonanych zadań, wróć do zakładki Home.</p>
+</ng-template>
 
 <a href="" (click)="sendMeHome()">
   <br>
   <br>
   <h4>&#8630;</h4>
-  <strong>Powrót do menu. </strong>
+  <strong>Wstecz</strong>
 </a>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -35,23 +35,26 @@ export class AddTaskComponent implements OnInit {
 
   addForm: FormGroup;
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
+
     this.addForm = this.initForm();
   }
 
-  initForm() {
+  initForm(): FormGroup {
     return new FormGroup({
       taskName: new FormArray([new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)])])
     });
   }
 
+
   add() {
     const tasksList = this.createTaskList();
     this.tasksService.add(tasksList);
     this.addForm = this.initForm();
+    console.log(this.addForm);
   }
 
   createTaskList(): Array<Task> {
@@ -67,6 +70,12 @@ export class AddTaskComponent implements OnInit {
   addField() {
     const arr = this.addForm.get('taskName') as FormArray;
     arr.push(new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
+  }
+  getValidity(i) {
+    return (this.addForm.get('taskName') as FormArray).controls[i].invalid;
+  }
+  removeTaskField(taskNameIndex: number): void {
+    (this.addForm.get('taskName') as FormArray).removeAt(taskNameIndex);
   }
 
 }

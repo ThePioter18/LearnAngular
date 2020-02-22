@@ -2,46 +2,35 @@
 
   <h4 id="header-input"> Dodaj zadanie na dziś</h4>
 
-  <!-- Grid row -->
-  <div class="form-row">
-    <!-- Grid column -->
-    <div class="col-auto">
-      <!-- Material input -->
-      <div class="md-form">
+  <div formArrayName="taskName">
+    <div *ngFor="let task of addForm.get('taskName')['controls']; let i = index">
+      <input type="text" placeholder="Text.." [formControlName]="i">
 
-        <!-- Miejsce na dodawanie tasków -->
-        <div formArrayName="taskName">
-          <div *ngFor="let task of addForm.get('taskName')['controls']; let i = index">
-            <input name="newTask" type="text" placeholder="Text.." [formControlName]="i">
+      <div class="delete-field" *ngIf="addForm.get('taskName')['length'] > 1 && i > 0">
+        <button type="button" class="btn btn-danger btn-sm pull-right" title="Delete Field"
+          (click)="removeTaskField(i)">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
-            <div *ngIf="addForm.get('taskName').invalid && addForm.get('taskName').dirty" class="alert alert-danger">
-              Nazwa jest wymagana!
-            </div>
-            <div *ngIf="addForm.get('taskName').hasError('maxlength') && addForm.get('taskName').dirty"
-              class="alert alert-danger">
-              Nazwa nie może być dłuższa niż 30 znaków.
+      <div *ngIf="addForm.get('taskName')['controls'][i].errors && addForm.get('taskName').dirty">
 
-            </div>
-            <div *ngIf="addForm.get('taskName').hasError('minlength') && addForm.get('taskName').dirty"
-              class="alert alert-danger">
-              Nazwa musi mieć co najmniej 3 znaki.
-
-            </div>
-          </div>
+        <div *ngIf="addForm.get('taskName')['controls'][i].errors?.required" class="alert alert-danger">
+          Nazwa jest wymagana!
+        </div>
+        <div *ngIf="addForm.get('taskName')['controls'][i].errors?.minlength" class="alert alert-danger">
+          Nazwa musi mieć co najmniej 3 znaki.
         </div>
       </div>
-    </div>
-    <!-- Grid column -->
-
-
-    <div class="col-auto">
-
-      <button class="btn btn-success" type="submit" [disabled]="addForm.invalid">Dodaj</button>
-      <button class="btn btn-success" type="button" (click)="addField()">Dodaj więcej</button>
 
     </div>
-    <!-- Grid column -->
+  </div>
+
+  <div class="btn-box">
+
+    <button class="btn btn-success" type="submit" [disabled]="addForm.invalid">Dodaj</button>
+    <button class="btn btn-success" type="button" (click)="addField()">Dodaj więcej</button>
 
   </div>
-  <!-- Grid row -->
+
 </form>

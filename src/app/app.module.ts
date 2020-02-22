@@ -21,7 +21,7 @@ import { SortNamePipe } from './shared/sort-name.pipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatGridListModule
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

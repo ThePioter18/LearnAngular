@@ -16,12 +16,20 @@ import { CheckedDirective } from './shared/checked.directive';
 import { DateDirective } from './shared/date.directive';
 import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortNamePipe } from './shared/sort-name.pipe';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuardService } from './auth/auth-guard.service';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 /*Angular Material*/
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -31,6 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [AuthGuardService],
     component: HomeComponent, children: [
 
       { path: 'todo', component: TodoTaskComponent },
@@ -42,8 +51,23 @@ const routes: Routes = [
   {
     path: 'about/:id',
     component: AboutComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyA9cvWDCklxsvY98XIkAJleJXJpaPkw1HA',
+  authDomain: 'auth-d17ed.firebaseapp.com',
+  databaseURL: 'https://auth-d17ed.firebaseio.com',
+  projectId: 'auth-d17ed',
+  storageBucket: 'auth-d17ed.appspot.com',
+  messagingSenderId: '499652368751',
+  appId: '1:499652368751:web:08c8150934ffca5ddf709a',
+  measurementId: 'G-93CGVYFF7X'
+};
 
 @NgModule({
   declarations: [
@@ -56,11 +80,16 @@ const routes: Routes = [
     CheckedDirective,
     DateDirective,
     TransformTaskPipe,
-    SortNamePipe
+    SortNamePipe,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -68,7 +97,8 @@ const routes: Routes = [
     MatCardModule,
     MatDividerModule,
     MatListModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

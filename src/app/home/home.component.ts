@@ -13,7 +13,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-  save() {
-    this.tasksService.saveTasksInDb();
-  }
+
 }

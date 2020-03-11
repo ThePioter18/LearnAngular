@@ -31,7 +31,7 @@ import { trigger, style, transition, animate, keyframes, query, stagger } from '
     ])
   ]
 })
-export class TodoTaskComponent implements OnInit {
+export class TodoTaskComponent {
 
   // @Input()
   // tasksList = [];
@@ -46,8 +46,6 @@ export class TodoTaskComponent implements OnInit {
       this.tasksList = tasks.filter(t => t.isDone === false);
     });
   }
-
-  ngOnInit() { }
 
   remove(task: Task) {
     // this.emitRemove.emit(task);

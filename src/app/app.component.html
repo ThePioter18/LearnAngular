@@ -7,6 +7,12 @@
     <li class="nav-item">
       <a routerLink="/about/48" routerLinkActive="active">About</a>
     </li>
+    <li class="nav-item">
+      <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
+    </li>
   </ul>
 </nav>
 

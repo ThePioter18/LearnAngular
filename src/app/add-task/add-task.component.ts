@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { FormGroup, FormArray, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -35,7 +37,7 @@ export class AddTaskComponent implements OnInit {
 
   addForm: FormGroup;
 
-  constructor(private tasksService: TasksService, private fb: FormBuilder) {
+  constructor(private tasksService: TasksService, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -49,19 +51,17 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-
   add() {
     const tasksList = this.createTaskList();
     this.tasksService.add(tasksList);
     this.addForm = this.initForm();
-    console.log(this.addForm);
   }
 
   createTaskList(): Array<Task> {
     const tasksList = new Array<Task>();
     const taskArr = this.addForm.get('taskName').value as [string];
     taskArr.forEach(taskName => {
-      const task = { name: taskName, created: new Date().toLocaleString(), isDone: false };
+      const task = { name: taskName, userId: this.authService.user.uid, created: new Date().toLocaleString(), isDone: false };
       tasksList.push(task);
     });
     return tasksList;

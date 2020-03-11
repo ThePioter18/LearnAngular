@@ -45,3 +45,9 @@ a {
 .btn:hover {
   background: #666;
 }
+
+.button-col {
+  display: inline-grid;
+
+  margin-top: 8px;
+}

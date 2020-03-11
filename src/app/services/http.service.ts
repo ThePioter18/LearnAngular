@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../models/task';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  localUrl = 'http://localhost:3000/tasks';
-  constructor(private http: HttpClient) {
-    this.getTasks();
-  }
+  public tasksList: any;
 
-  getTasks(): Observable<Array<Task>> {
-    return this.http.get<Array<Task>>(this.localUrl);
-  }
+  constructor(private db: AngularFirestore) { }
 
-  saveTasks(list: Array<Task>) {
-    this.http.post(this.localUrl, list).subscribe(tasks => {
-      console.log(tasks);
-    });
+  getTasks() {
+    this.tasksList = this.db.collection('tasks').snapshotChanges()
+      .pipe(map(docArray => {
+        return docArray.map(doc => {
+          return ({
+            id: doc.payload.doc.id,
+            // tslint:disable-next-line: no-string-literal
+            userId: doc.payload.doc.data()['userId'],
+            // tslint:disable-next-line: no-string-literal
+            name: doc.payload.doc.data()['name'],
+            // tslint:disable-next-line: no-string-literal
+            created: doc.payload.doc.data()['created'],
+            // tslint:disable-next-line: no-string-literal
+            isDone: doc.payload.doc.data()['isDone']
+          }
+            // doc
+          );
+        });
+      }));
+
+    return this.tasksList;
   }
 
 }

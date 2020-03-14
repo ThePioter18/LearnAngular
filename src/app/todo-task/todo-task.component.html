@@ -3,9 +3,26 @@
   <ul [@tasksList]='tasksList.length'>
     <li appDate [date]="task.created" *ngFor=" let task of tasksList | sortName; let i=index let odd=odd"
       [ngClass]="{ 'odd-li': odd===true, 'last-li':tasksList.length===1 }">
-      Zadanie {{i+1}}. Do wykonania: {{ task.name | transformTask: '!'}}
-      <button type="button" class="btn btn-danger" (click)="remove(task, i)"> Usuń</button>
-      <button type="button" class="btn btn-success" (click)="done(task, i)">Zrobione</button>
+      <div class="editTask"  title="Edycja nazwy">
+        <i (click)="editTask(task)" class="fa fa-pencil"></i>
+      </div>
+      <div class="taskName">
+        Zadanie {{i+1}}. Do wykonania: {{ task.name | transformTask: '!'}}
+
+        <button type="button" class="btn btn-danger" (click)="remove(task, i)"> Usuń</button>
+        <button type="button" class="btn btn-success" (click)="done(task, i)">Zrobione</button>
+      </div>
+      <div *ngIf="editState && taskToEdit.id === task.id">
+        <br>
+        <form (ngSubmit)="updateTask(task)">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" name="text" placeholder="Edytuj nazwe" [(ngModel)]="task.name">
+              <button mat-stroked-button class="update-btn">Popraw</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </li>
   </ul>
 </ng-container>

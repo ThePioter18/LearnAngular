@@ -40,6 +40,8 @@ export class TodoTaskComponent {
   // @Output()
   // emitRemove = new EventEmitter<string>();
   tasksList: Array<Task> = [];
+  editState: boolean = false;
+  taskToEdit: Task;
 
   constructor(private tasksService: TasksService) {
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
@@ -49,11 +51,24 @@ export class TodoTaskComponent {
 
   remove(task: Task) {
     // this.emitRemove.emit(task);
-    this.tasksService.remove(task);
+    const response = confirm('Czy na pewno chcesz usunąć?');
+    if (response) {
+      this.tasksService.remove(task);
+    }
+  }
+  editTask(task: Task) {
+    this.editState = !this.editState;
+    this.taskToEdit = task;
+  }
+  updateTask(task: Task) {
+    this.tasksService.updateTask(task);
+    this.taskToEdit = null;
+    this.editState = false;
   }
   done(task: Task, index: number) {
     // this.emitDone.emit(task);
     this.tasksService.done(task, index);
+    
   }
   getColor(): string {
     return this.tasksList.length >= 5 ? '#dc3545' : '#28a745';

@@ -16,7 +16,7 @@ export class DateDirective {
   // metody
   @HostListener('mouseenter')
   mouseenter() {
-    this.paragraph.innerHTML = this.date;
+    this.paragraph.innerHTML = 'Dodane: ' + this.date;
     this.renderer.appendChild(this.el.nativeElement, this.paragraph);
   }
   @HostListener('mouseleave')

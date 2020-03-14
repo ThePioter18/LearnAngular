@@ -18,3 +18,10 @@ li {
   background: rgb(241, 162, 175);
   margin: 5px;
 }
+.editTask{
+  cursor: pointer;
+}
+
+.update-btn {
+  margin-left: 5px;
+}

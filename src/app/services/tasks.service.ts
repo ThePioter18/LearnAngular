@@ -42,6 +42,12 @@ export class TasksService {
     this.taskDoc.delete();
   }
 
+  updateTask(task: Task) {
+    // Firebase/update
+    this.taskDoc = this.db.doc(`tasks/${task.id}`);
+    this.taskDoc.update(task);
+  }
+  
   done(task: Task, index: number) {
     task.end = new Date().toLocaleString();
     task.isDone = true;

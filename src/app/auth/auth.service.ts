@@ -13,7 +13,6 @@ export class AuthService {
   constructor(public angularFire: AngularFireAuth, private router: Router) {
     angularFire.authState.subscribe(user => {
       this.router.navigate(['/home']);
-
       this.user = user;
     });
   }
@@ -35,4 +34,5 @@ export class AuthService {
   logout() {
     this.angularFire.signOut();
   }
+
 }

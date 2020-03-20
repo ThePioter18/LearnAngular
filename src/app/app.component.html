@@ -1,6 +1,8 @@
 <nav>
-  <ul>
-    <h4> LearnAngular </h4>
+
+  <h4> LearnAngular </h4>
+  <button class="burger-icon" mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <ul class="nav-items main-nav mobile-hide">
     <li class="nav-item">
       <a routerLink="/home" routerLinkActive="active">Home</a>
     </li>
@@ -12,7 +14,27 @@
     </li>
     <li class="nav-item">
       <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
+      <span style="margin-left: 50px;">{{user?.email}}</span>
     </li>
+  </ul>
+  <ul>
+
+    <mat-menu #menu="matMenu">
+      <li class="nav-item">
+        <a routerLink="/home" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/about/48" routerLinkActive="active">About</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
+        <span style="margin-left: 50px;">{{user?.email}}</span>
+      </li>
+
+    </mat-menu>
   </ul>
 </nav>
 

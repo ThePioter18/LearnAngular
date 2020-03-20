@@ -1,11 +1,14 @@
 p {
   padding: 5px;
+  height: 2rem;
 }
 
 li {
   background: rgb(115, 107, 151);
   margin: 5px;
   padding: 15px;
+  width: 40rem;
+  height: 10rem;
 }
 
 /*nieparzysty element listy*/
@@ -18,10 +21,18 @@ li {
   background: rgb(241, 162, 175);
   margin: 5px;
 }
-.editTask{
+
+.fa {
   cursor: pointer;
 }
 
 .update-btn {
   margin-left: 5px;
+}
+
+@media(max-width: 992px) {
+  li {
+    width: 100%;
+    height: auto;
+  }
 }

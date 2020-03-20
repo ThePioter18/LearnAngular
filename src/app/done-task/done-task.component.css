@@ -1,0 +1,19 @@
+p {
+  padding: 5px;
+  height: 2rem;
+}
+
+li {
+  background: rgb(115, 107, 151);
+  margin: 5px;
+  padding: 15px;
+  width: 20rem;
+  height: 5rem;
+}
+
+@media(max-width: 992px) {
+  li {
+    width: 100%;
+    height: auto;
+  }
+}

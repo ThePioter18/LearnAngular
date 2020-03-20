@@ -22,7 +22,6 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 /*Angular Material*/
 import { MatCardModule } from '@angular/material/card';
@@ -30,6 +29,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -40,6 +40,8 @@ const routes: Routes = [
   {
     path: 'home',
     canActivate: [AuthGuardService],
+    runGuardsAndResolvers: 'always',
+
     component: HomeComponent, children: [
 
       { path: 'todo', component: TodoTaskComponent },
@@ -84,7 +86,7 @@ const firebaseConfig = {
     LoginComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
@@ -98,7 +100,8 @@ const firebaseConfig = {
     MatDividerModule,
     MatListModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

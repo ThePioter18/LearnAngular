@@ -3,8 +3,8 @@
   <ul [@tasksList]='tasksList.length'>
     <li appDate [date]="task.created" *ngFor=" let task of tasksList | sortName; let i=index let odd=odd"
       [ngClass]="{ 'odd-li': odd===true, 'last-li':tasksList.length===1 }">
-      <div class="editTask"  title="Edycja nazwy">
-        <i (click)="editTask(task)" class="fa fa-pencil"></i>
+      <div class="editTask">
+        <i (click)="editTask(task)" class="fa fa-pencil" title="Edycja nazwy"></i>
       </div>
       <div class="taskName">
         Zadanie {{i+1}}. Do wykonania: {{ task.name | transformTask: '!'}}

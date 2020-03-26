@@ -9,30 +9,33 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
 
   user: User;
-
   constructor(public angularFire: AngularFireAuth, private router: Router) {
     angularFire.authState.subscribe(user => {
       this.router.navigate(['/home']);
       this.user = user;
     });
+
   }
 
   login(email: string, password: string) {
-    this.angularFire.signInWithEmailAndPassword(email, password).then(user => {
-    }).catch(err => {
-      console.log(err);
+    return new Promise<any>((resolve, reject) => {
+      this.angularFire.auth.signInWithEmailAndPassword(email, password).then(res => {
+        console.log(res);
+        resolve(res);
+      }, err => reject(err));
     });
+
   }
   signup(email: string, password: string) {
-    this.angularFire.createUserWithEmailAndPassword(email, password).then(user => {
+    this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(user => {
       console.log(user);
     }).catch(err => {
-      console.log(err);
+      // this.handleError(err);
     });
   }
 
   logout() {
-    this.angularFire.signOut();
+    this.angularFire.auth.signOut();
   }
 
 }

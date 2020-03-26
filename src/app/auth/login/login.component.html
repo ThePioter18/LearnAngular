@@ -5,11 +5,13 @@
 
     <label>Hasło</label>
     <input ngModel type="password" name="password" required>
+    <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
 
     <div class="button-col">
       <button mat-stroked-button type="submit" [disabled]="formData.invalid">Zaloguj</button>
       <button mat-stroked-button type="button" style="margin-top: 8px" [disabled]="formData.invalid"
         (click)="signup(formData)">Zarejestruj</button>
+
     </div>
   </div>
 </form>

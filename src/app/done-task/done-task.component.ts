@@ -17,7 +17,13 @@ export class DoneTaskComponent implements OnInit {
 
     });
   }
-
+  remove(task: Task) {
+    // this.emitRemove.emit(task);
+    const response = confirm('Czy na pewno chcesz usunąć?');
+    if (response) {
+      this.tasksService.remove(task);
+    }
+  }
   ngOnInit() {
   }
 

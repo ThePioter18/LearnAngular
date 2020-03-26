@@ -101,7 +101,7 @@ const firebaseConfig = {
     MatListModule,
     MatInputModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

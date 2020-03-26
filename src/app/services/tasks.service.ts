@@ -68,6 +68,10 @@ export class TasksService {
     task.isDone = true;
     const list = this.tasksListObs.getValue();
     this.tasksListObs.next(list);
+
+    // Firebase/add/done-task
+    this.tasksCollection.add(task);
+
   }
 
   // getTasks
@@ -86,6 +90,8 @@ export class TasksService {
             name: doc.payload.doc.data()['name'],
             // tslint:disable-next-line: no-string-literal
             created: doc.payload.doc.data()['created'],
+            // tslint:disable-next-line: no-string-literal
+            end: doc.payload.doc.data()['end'],
             // tslint:disable-next-line: no-string-literal
             isDone: doc.payload.doc.data()['isDone']
 

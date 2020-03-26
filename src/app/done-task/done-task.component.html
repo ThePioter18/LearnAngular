@@ -2,5 +2,7 @@
 <ul>
   <li appDate [date]="done.end" *ngFor="let done of tasksDone">
     <i appChecked class="fas fa-check-circle"></i> {{done.name}}
+    <button type="button" class="btn btn-danger" (click)="remove(done)"> Usuń</button>
+
   </li>
 </ul>

@@ -40,7 +40,7 @@ export class TodoTaskComponent {
   // @Output()
   // emitRemove = new EventEmitter<string>();
   tasksList: Array<Task> = [];
-  editState: boolean = false;
+  editState = false;
   taskToEdit: Task;
 
   constructor(private tasksService: TasksService) {
@@ -67,8 +67,9 @@ export class TodoTaskComponent {
   }
   done(task: Task, index: number) {
     // this.emitDone.emit(task);
+    this.tasksService.remove(task);
     this.tasksService.done(task, index);
-    
+
   }
   getColor(): string {
     return this.tasksList.length >= 5 ? '#dc3545' : '#28a745';

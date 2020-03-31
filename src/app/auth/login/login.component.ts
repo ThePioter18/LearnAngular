@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,17 @@ import { NgForm } from '@angular/forms';
 export class LoginComponent {
 
   errorMessage = '';
+  successMessage = '';
+  registerTabIndex: number;
+  tabIndex = 0;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.registerTabIndex = params.registerIndex;
+      this.transitionBtnTab();
+      this.tabIndex = 0;
+    });
+  }
 
   // metoda loginu
   login(formData: NgForm) {
@@ -36,15 +46,22 @@ export class LoginComponent {
           this.errorMessage = err.message;
           return this.errorMessage;
         }
+        case 'auth/too-many-requests': {
+          err.message = 'Zbyt wiele nieudanych prób logowania. Spróbuj ponownie później.';
+          this.errorMessage = err.message;
+          return this.errorMessage;
+        }
         default: {
-          return 'Zbyt wiele nieudanych prób logowania. Spróbuj ponownie później.';
+          err.message = 'Spróbuj później.';
+          this.errorMessage = err.message;
+          return this.errorMessage;
         }
       }
     });
   }
-  // metoda rejestracji
-  signup(formData: NgForm) {
-    this.authService.signup(formData.value.email, formData.value.password);
-  }
 
+  public transitionBtnTab() {
+    const tabCount = 2;
+    this.tabIndex = (this.tabIndex + 1) % tabCount;
+  }
 }

@@ -1,17 +1,52 @@
-<form (ngSubmit)="login(formData)" #formData="ngForm">
-  <div style="display: inline-grid; margin: 10px">
-    <label>E-mail</label>
-    <input ngModel type="email" name="email" required>
+<div class="main-div">
 
-    <label>Hasło</label>
-    <input ngModel type="password" name="password" required>
-    <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
+  <mat-tab-group [(selectedIndex)]="tabIndex">
+    <mat-tab label="Login">
+      <ng-template mat-tab-label>
+        <mat-icon>supervisor_account</mat-icon>
+      </ng-template>
+      <mat-card class="login-card">
 
-    <div class="button-col">
-      <button mat-stroked-button type="submit" [disabled]="formData.invalid">Zaloguj</button>
-      <button mat-stroked-button type="button" style="margin-top: 8px" [disabled]="formData.invalid"
-        (click)="signup(formData)">Zarejestruj</button>
+        <mat-card-header>
+          <mat-card-title>Login</mat-card-title>
+        </mat-card-header>
 
-    </div>
-  </div>
-</form>
+        <mat-card-content>
+
+          <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
+
+            <div style="display: inline-grid; margin: 10px">
+              <mat-form-field>
+                <input matInput placeholder="email" ngModel type="email" name="email" required>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="password" ngModel type="password" name="password" required>
+              </mat-form-field>
+              <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
+
+              <div class="button-col">
+                <button mat-stroked-button type="submit" [disabled]="formLogin.invalid">Zaloguj</button>
+              </div>
+              <span>No account yet?</span>
+              <a style="cursor: pointer;" (click)="transitionBtnTab()">Click register</a>
+            </div>
+          </form>
+
+        </mat-card-content>
+
+      </mat-card>
+    </mat-tab>
+
+    <!-- Register -->
+    <mat-tab label="Register">
+      <ng-template mat-tab-label>
+        <mat-icon>lock_open</mat-icon>
+      </ng-template>
+
+      <app-register></app-register>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

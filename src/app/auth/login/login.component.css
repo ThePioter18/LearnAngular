@@ -1,5 +1,31 @@
-form {
+.alert {
+  margin: 0px;
+}
+
+span,
+a {
+  text-align: center;
+}
+
+span {
+  margin-top: 10px;
+}
+
+/* style button */
+.mat-stroked-button {
+  background-color: rgba(171, 170, 190, 0.5);
+}
+
+.main-div {
   display: flex;
   justify-content: center;
   margin-top: 50px;
+}
+
+.mat-card {
+  text-align: center;
+  width: 20rem;
+  height: 22rem;
+  border-radius: 0px;
+  color: rgba(131, 131, 153);
 }

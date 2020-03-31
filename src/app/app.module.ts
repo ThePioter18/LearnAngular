@@ -18,6 +18,7 @@ import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortNamePipe } from './shared/sort-name.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { RegisterComponent } from './auth/register/register.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -30,7 +31,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material';
+import { MatStepperModule } from '@angular/material/stepper';
 const routes: Routes = [
   {
     path: '',
@@ -57,6 +60,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
@@ -83,7 +90,8 @@ const firebaseConfig = {
     DateDirective,
     TransformTaskPipe,
     SortNamePipe,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
@@ -102,6 +110,9 @@ const firebaseConfig = {
     MatInputModule,
     MatButtonModule,
     MatMenuModule,
+    MatTabsModule,
+    MatIconModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

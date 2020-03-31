@@ -7,7 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthService {
-
+  errorMessage = '';
+  successMessage = '';
   user: User;
   constructor(public angularFire: AngularFireAuth, private router: Router) {
     angularFire.authState.subscribe(user => {
@@ -20,20 +21,19 @@ export class AuthService {
   login(email: string, password: string) {
     return new Promise<any>((resolve, reject) => {
       this.angularFire.auth.signInWithEmailAndPassword(email, password).then(res => {
-        console.log(res);
         resolve(res);
       }, err => reject(err));
     });
 
   }
   signup(email: string, password: string) {
-    this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      console.log(user);
-    }).catch(err => {
-      // this.handleError(err);
+    return new Promise<any>((resolve, reject) => {
+      this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(res => {
+        resolve(res);
+      }, err => reject(err));
     });
-  }
 
+  }
   logout() {
     this.angularFire.auth.signOut();
   }

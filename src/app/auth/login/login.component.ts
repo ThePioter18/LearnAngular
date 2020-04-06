@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,24 +9,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   errorMessage = '';
   successMessage = '';
   registerTabIndex: number;
   tabIndex = 0;
 
-  constructor(public authService: AuthService, public route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.registerTabIndex = params.registerIndex;
-      this.transitionBtnTab();
-      this.tabIndex = 0;
-    });
-  }
+  navLinks = [
+    { path: '/login', label: 'Login' },
+    { path: '/register', label: 'Register' },
+  ];
+
+  constructor(public authService: AuthService, public route: ActivatedRoute, private router: Router) { }
+
 
   // metoda loginu
   login(formData: NgForm) {
-    this.authService.login(formData.value.email, formData.value.password).then(res => {
-      console.log(res);
+    this.authService.login(formData.value.email, formData.value.password).then(() => {
     }, err => {
       console.log(err);
 
@@ -61,7 +59,7 @@ export class LoginComponent {
   }
 
   public transitionBtnTab() {
-    const tabCount = 2;
-    this.tabIndex = (this.tabIndex + 1) % tabCount;
+    this.router.navigate(['register']);
+
   }
 }

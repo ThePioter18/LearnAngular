@@ -1,34 +1,53 @@
-<mat-card class="register-card">
-  <mat-card-header>
-    <mat-card-title>Register</mat-card-title>
-  </mat-card-header>
+<div class="main-div">
+  <div mat-tab-nav-bar>
 
-  <mat-card-content>
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
 
-    <form (ngSubmit)="signup(formRegister)" #formRegister="ngForm">
+      <ng-container *ngIf="link.label==='Login'; else lock">
+        <mat-icon>supervisor_account</mat-icon>
+      </ng-container>
+      <ng-template #lock>
+        <mat-icon>lock_open</mat-icon>
+      </ng-template>
 
-      <div style="display: inline-grid; margin: 10px">
-        <mat-form-field>
-          <input matInput placeholder="email" ngModel type="email" name="email" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="password" ngModel type="password" name="password" required>
-        </mat-form-field>
+    </a>
 
-        <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
-        <label *ngIf="successMessage" class="alert alert-success">{{successMessage}}</label>
+  </div>
+</div>
+<div class="register-div">
+  <mat-card class="register-card">
 
-        <div class="button-col">
-          <button mat-stroked-button type="button" [disabled]="formRegister.invalid"
-            (click)="signup(formRegister)">Zarejestruj</button>
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+
+      <form #formRegister="ngForm">
+
+        <div style="display: inline-grid; margin: 10px">
+          <mat-form-field>
+            <input matInput placeholder="email" ngModel type="email" name="email" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="password" ngModel type="password" name="password" required>
+          </mat-form-field>
+
+          <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
+          <label *ngIf="successMessage" class="alert alert-success">{{successMessage}}</label>
+
+          <div class="button-col">
+            <button mat-stroked-button type="button" [disabled]="formRegister.invalid"
+              (click)="signup(formRegister)">Zarejestruj</button>
+
+          </div>
+          <a class="click-a" style="margin-top: 20px;" (click)="transitionBtnTab()">Back login</a>
         </div>
-        <a style="cursor: pointer; margin-top: 20px;" (click)="transitionBtnTab()">Back
-          login</a>
-      </div>
 
-    </form>
+      </form>
 
-  </mat-card-content>
+    </mat-card-content>
 
-</mat-card>
+  </mat-card>
+</div>

@@ -34,6 +34,7 @@ import { MatMenuModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
+import { UserComponent } from './auth/user/user.component';
 const routes: Routes = [
   {
     path: '',
@@ -45,13 +46,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     runGuardsAndResolvers: 'always',
 
-    component: HomeComponent, children: [
-
+    component: HomeComponent,
+    children: [
       { path: 'todo', component: TodoTaskComponent },
       { path: 'done', component: DoneTaskComponent }
-
     ]
-
   },
   {
     path: 'about/:id',
@@ -64,6 +63,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'user',
+    component: UserComponent
   }
 ];
 
@@ -91,7 +94,8 @@ const firebaseConfig = {
     TransformTaskPipe,
     SortNamePipe,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
@@ -115,6 +119,6 @@ const firebaseConfig = {
     MatStepperModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

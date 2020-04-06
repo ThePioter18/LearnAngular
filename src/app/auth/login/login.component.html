@@ -1,52 +1,50 @@
 <div class="main-div">
+  <div mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
 
-  <mat-tab-group [(selectedIndex)]="tabIndex">
-    <mat-tab label="Login">
-      <ng-template mat-tab-label>
+      <ng-container *ngIf="link.label==='Login'; else lock">
         <mat-icon>supervisor_account</mat-icon>
-      </ng-template>
-      <mat-card class="login-card">
-
-        <mat-card-header>
-          <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-
-        <mat-card-content>
-
-          <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
-
-            <div style="display: inline-grid; margin: 10px">
-              <mat-form-field>
-                <input matInput placeholder="email" ngModel type="email" name="email" required>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="password" ngModel type="password" name="password" required>
-              </mat-form-field>
-              <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
-
-              <div class="button-col">
-                <button mat-stroked-button type="submit" [disabled]="formLogin.invalid">Zaloguj</button>
-              </div>
-              <span>No account yet?</span>
-              <a style="cursor: pointer;" (click)="transitionBtnTab()">Click register</a>
-            </div>
-          </form>
-
-        </mat-card-content>
-
-      </mat-card>
-    </mat-tab>
-
-    <!-- Register -->
-    <mat-tab label="Register">
-      <ng-template mat-tab-label>
+      </ng-container>
+      <ng-template #lock>
         <mat-icon>lock_open</mat-icon>
       </ng-template>
 
-      <app-register></app-register>
+    </a>
 
-    </mat-tab>
+  </div>
+</div>
+<div class="login-div">
+  <mat-card class="login-card">
 
-  </mat-tab-group>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+
+      <form #formLogin="ngForm">
+
+        <div style="display: inline-grid; margin: 10px">
+          <mat-form-field>
+            <input matInput placeholder="email" ngModel type="email" name="email" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="password" ngModel type="password" name="password" required>
+          </mat-form-field>
+          <label *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</label>
+
+          <div class="button-col">
+            <button mat-stroked-button type="button" [disabled]="formLogin.invalid"
+              (click)="login(formLogin)">Zaloguj</button>
+
+          </div>
+          <span class="account-txt">No account yet?</span>
+          <a class="click-a" (click)="transitionBtnTab()"> Click register</a>
+        </div>
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
 </div>

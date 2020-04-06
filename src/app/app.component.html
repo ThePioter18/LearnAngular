@@ -1,7 +1,11 @@
 <nav>
 
   <h4> LearnAngular </h4>
-  <button class="burger-icon" mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <button class="burger-icon" mat-button [matMenuTriggerFor]="menu">
+    <ng-template mat-tab-label class='menu'>
+      <mat-icon>menu</mat-icon>
+    </ng-template>
+  </button>
   <ul class="nav-items main-nav mobile-hide">
     <li class="nav-item">
       <a routerLink="/home" routerLinkActive="active">Home</a>
@@ -13,6 +17,14 @@
       <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>
       <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
       <span style="margin-left: 50px;">{{user?.email}}</span>
+
+      <ng-container *ngFor="let userL of usersList">
+        <ng-container *ngIf="authService.user && email === userL.emailUser">
+          <span style="margin-left: 50px;"><b>username:</b> {{userL.username}}</span>
+
+        </ng-container>
+      </ng-container>
+
     </li>
   </ul>
   <ul>
@@ -26,13 +38,15 @@
       </li>
       <li class="nav-item">
         <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>
+        <p *ngIf="!authService.user" style="margin-left: 50px;">{{user?.email}}</p>
+
       </li>
       <li class="nav-item">
         <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
-        <span style="margin-left: 50px;">{{user?.email}}</span>
       </li>
 
     </mat-menu>
   </ul>
 </nav>
+
 <router-outlet></router-outlet>

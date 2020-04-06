@@ -6,14 +6,16 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-
+  reg = '';
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
     if (this.authService.user) {
       return true;
     }
     this.router.navigate(['/login']);
     return false;
   }
+
 }

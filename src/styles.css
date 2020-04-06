@@ -61,3 +61,45 @@ a {
 .mat-tab-labels {
   justify-content: center;
 }
+
+/*
+login/register */
+
+.alert {
+  margin: 0px;
+}
+
+.account-txt,
+.click-a {
+  text-align: center;
+  cursor: pointer;
+}
+
+.account-txt {
+  margin-top: 10px;
+}
+
+/* style button */
+.mat-stroked-button {
+  background-color: rgba(171, 170, 190, 0.5);
+}
+
+.main-div,
+.login-div,
+.register-div {
+  display: flex;
+  justify-content: center;
+}
+
+.main-div {
+  margin-top: 50px;
+
+}
+
+.mat-card {
+  text-align: center;
+  width: 20rem;
+  height: 22rem;
+  border-radius: 0px;
+  color: rgba(131, 131, 153);
+}

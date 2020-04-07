@@ -1,0 +1,14 @@
+<div class="main-div">
+  <mat-card>
+    <ng-container *ngFor="let userL of userList">
+      <ng-container *ngIf="authService.user && authService.user.email === userL.emailUser">
+        <h4>My profile</h4>
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Username: </b> </mat-list-item>{{ userL.username}}
+          <mat-list-item role="listitem"><b>Email: </b> </mat-list-item>{{ userL.emailUser}}
+          <mat-list-item role="listitem"><b>Age: </b> </mat-list-item>{{ userL.age}} lat
+        </mat-list>
+      </ng-container>
+    </ng-container>
+  </mat-card>
+</div>

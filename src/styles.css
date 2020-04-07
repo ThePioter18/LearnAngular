@@ -102,4 +102,30 @@ login/register */
   height: 22rem;
   border-radius: 0px;
   color: rgba(131, 131, 153);
+
+}
+
+.edit-row {
+  transition: 0.5s ease-in-out;
+  transform: translateX(0);
+}
+
+.drawer {
+  transform: translateX(-200%) !important;
+}
+
+@media (max-width: 599px) {
+  .mat-tab-link {
+    min-width: 160px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .mat-tab-link {
+    min-width: 72px !important;
+  }
+
+  .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none !important;
+  }
 }

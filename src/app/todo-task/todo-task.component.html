@@ -1,5 +1,7 @@
 <ng-container *ngIf="tasksList.length > 0; else noTask">
-  <p [ngStyle]="{background: getColor()}">Zadania do wykonania: {{tasksList.length}}</p>
+  <p [ngStyle]="{'box-shadow':  getShadow(), background: getColor()}">
+    Zadania do wykonania:
+    {{tasksList.length}}</p>
   <ul [@tasksList]='tasksList.length'>
     <li appDate [date]="task.created" *ngFor=" let task of tasksList | sortName; let i=index let odd=odd"
       [ngClass]="{ 'odd-li': odd===true, 'last-li':tasksList.length===1 }">

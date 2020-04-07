@@ -74,4 +74,7 @@ export class TodoTaskComponent {
   getColor(): string {
     return this.tasksList.length >= 5 ? '#dc3545' : '#28a745';
   }
+  getShadow(): string {
+    return '0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)';
+  }
 }

@@ -1,0 +1,18 @@
+#slide {
+  position: relative;
+  left: -70px;
+  animation: slide 0.5s forwards;
+  animation-delay: 0.1s;
+}
+
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}

@@ -35,6 +35,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { UserComponent } from './auth/user/user.component';
+import { ProfileComponent } from './auth/profile/profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -67,6 +68,12 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuardService],
+    component: ProfileComponent
+
   }
 ];
 
@@ -95,7 +102,8 @@ const firebaseConfig = {
     SortNamePipe,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),

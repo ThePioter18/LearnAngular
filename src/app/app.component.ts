@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
       this.user = user;
 
       if (user) {
-        console.log('email:', this.user.email);
         this.email = this.user.email;
       } else {
         this.router.navigate(['/login']);

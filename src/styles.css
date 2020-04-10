@@ -32,6 +32,11 @@ a {
   text-decoration: none !important;
 }
 
+.question {
+  font-size: 1.0em !important;
+
+}
+
 .container {
   padding: 0 1rem;
 }
@@ -103,15 +108,6 @@ login/register */
   border-radius: 0px;
   color: rgba(131, 131, 153);
 
-}
-
-.edit-row {
-  transition: 0.5s ease-in-out;
-  transform: translateX(0);
-}
-
-.drawer {
-  transform: translateX(-200%) !important;
 }
 
 @media (max-width: 599px) {

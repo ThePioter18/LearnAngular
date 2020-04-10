@@ -19,6 +19,11 @@ import { SortNamePipe } from './shared/sort-name.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { RegisterComponent } from './auth/register/register.component';
+import { UserComponent } from './auth/user/user.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { QuestionComponent } from './forum/question/question.component';
+import { AnswerComponent } from './forum/answer/answer.component';
+import { QuestionDialogComponent } from './forum/question/question-dialog/question-dialog.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -34,8 +39,9 @@ import { MatMenuModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
-import { UserComponent } from './auth/user/user.component';
-import { ProfileComponent } from './auth/profile/profile.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
+
 const routes: Routes = [
   {
     path: '',
@@ -46,12 +52,7 @@ const routes: Routes = [
     path: 'home',
     canActivate: [AuthGuardService],
     runGuardsAndResolvers: 'always',
-
     component: HomeComponent,
-    children: [
-      { path: 'todo', component: TodoTaskComponent },
-      { path: 'done', component: DoneTaskComponent }
-    ]
   },
   {
     path: 'about/:id',
@@ -73,7 +74,15 @@ const routes: Routes = [
     path: 'profile',
     canActivate: [AuthGuardService],
     component: ProfileComponent
-
+  },
+  {
+    path: 'question',
+    // canActivate: [AuthGuardService],
+    component: QuestionComponent
+  },
+  {
+    path: 'answer',
+    component: AnswerComponent
   }
 ];
 
@@ -103,7 +112,10 @@ const firebaseConfig = {
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    ProfileComponent
+    ProfileComponent,
+    QuestionComponent,
+    AnswerComponent,
+    QuestionDialogComponent
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
@@ -124,9 +136,14 @@ const firebaseConfig = {
     MatMenuModule,
     MatTabsModule,
     MatIconModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [
+    QuestionDialogComponent
+  ]
+
 })
 export class AppModule { }

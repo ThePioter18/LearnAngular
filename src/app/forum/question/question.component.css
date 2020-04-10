@@ -1,0 +1,17 @@
+.main-question {
+  margin-top: 30px;
+}
+
+.panel {
+  cursor: pointer
+}
+
+.ans-votes {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.votes {
+  justify-content: flex-end
+}

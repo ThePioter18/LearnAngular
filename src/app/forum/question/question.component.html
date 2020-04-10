@@ -1,0 +1,60 @@
+  <div class="main-question">
+
+    <h4>{{title}}</h4>
+
+    <ng-container *ngIf="authService.user else noUser">
+      <button mat-raised-button color="primary" type="button" (click)="openDialog()">New Question</button>
+
+    </ng-container>
+    <ng-template #noUser>
+      <p>Aby zadać pytanie, zaloguj się.</p>
+      <button mat-raised-button color="accent" type="button" (click)="goToLogin()">Zaloguj się</button>
+
+    </ng-template>
+    <!-- <app-question-dialog [questions]="questions"></app-question-dialog> -->
+    <!-- <li *ngIf="newQuery">
+    You chose: <i>{{newQuery}}</i>
+  </li> -->
+
+    <ng-container *ngFor="let q of questions">
+
+      <!-- <div class="main-div"> {{question.query}} -->
+
+      <mat-list>
+        <div class="panel">
+          <mat-list-item>{{q.query}}
+            <span style="margin-left: 25px;">
+              <mat-icon>face</mat-icon>{{q.author}}
+            </span>
+          </mat-list-item>
+        </div>
+
+        <!--start ans-votes-->
+        <div class="ans-votes">
+
+          <div class="answers">
+            <span>({{q.answer}})Answers</span>
+          </div>
+
+          <div class="votes">
+            <a style="margin-right: 45px;">{{q.votes}}</a>
+
+            <button mat-raised-button color="primary" (click)="addVote(q, 1)">
+              <mat-icon>thumb_up</mat-icon>
+            </button>
+            <button mat-raised-button color="accent" (click)="addVote(q, -1)">
+              <mat-icon>thumb_down</mat-icon>
+            </button>
+          </div>
+
+        </div>
+        <!--end ans-votes-->
+
+        <mat-divider></mat-divider>
+      </mat-list>
+
+    </ng-container>
+
+
+  </div>
+  <br><a style="cursor: pointer;" (click)="goToAnswer()">Przejście do answers!<a>

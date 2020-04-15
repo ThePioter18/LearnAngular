@@ -1,0 +1,14 @@
+<div style="text-align: center;">
+  <h1 mat-dialog-title>Hej {{answer.authorAnswer}}</h1>
+  <div mat-dialog-content>
+    <p>Odpowiedz na pytanie</p>
+    <mat-form-field style="width: 20rem;">
+      <mat-label>text</mat-label>
+      <input matInput [(ngModel)]="answer.reply">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="display: flex; justify-content: center;">
+    <button mat-button (click)="onNoClick()">Anuluj</button>
+    <button [disabled]="!answer.reply" mat-button [mat-dialog-close]="answer.reply" (click)="addAnswer()">Ok</button>
+  </div>
+</div>

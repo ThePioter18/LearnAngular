@@ -41,6 +41,7 @@ import { MatIconModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { AnswerDialogComponent } from './forum/answer/answer-dialog/answer-dialog.component';
 
 const routes: Routes = [
   {
@@ -77,8 +78,8 @@ const routes: Routes = [
   },
   {
     path: 'question',
-    // canActivate: [AuthGuardService],
-    component: QuestionComponent
+    component: QuestionComponent,
+
   },
   {
     path: 'answer',
@@ -115,7 +116,8 @@ const firebaseConfig = {
     ProfileComponent,
     QuestionComponent,
     AnswerComponent,
-    QuestionDialogComponent
+    QuestionDialogComponent,
+    AnswerDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
@@ -142,7 +144,8 @@ const firebaseConfig = {
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    QuestionDialogComponent
+    QuestionDialogComponent,
+    AnswerDialogComponent
   ]
 
 })

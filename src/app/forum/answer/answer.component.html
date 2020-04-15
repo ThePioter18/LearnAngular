@@ -1,2 +1,51 @@
-<h4>{{title}}</h4>
-<a style="cursor: pointer;" (click)="goToQuestion()">Powrót do Questions</a>
+<div class="main-answer">
+
+  <h4>{{title}}</h4>
+
+  <ng-container *ngIf="authService.user else noUser">
+    <button mat-raised-button color="primary" type="button" (click)="openDialogAnswer()">New Answer</button>
+
+  </ng-container>
+  <ng-template #noUser>
+    <p>Aby odpowiedzieć na pytanie, zaloguj się.</p>
+    <button mat-raised-button color="accent" type="button" (click)="goToLogin()">Zaloguj się</button>
+
+  </ng-template>
+  <ng-container *ngFor="let answer of answers">
+    <ng-container *ngIf="answer.idQuestion==id; ">
+
+      <mat-list>
+
+        <div class="panel">
+          <mat-list-item>{{answer.reply}}
+            <span style="margin-left: 25px;">
+              <mat-icon>face</mat-icon>{{answer.authorAnswer}}
+            </span>
+          </mat-list-item>
+        </div>
+
+        <!--start ans-votes-->
+        <div class="ans-votes">
+
+          <div class="votes">
+            <a style="margin-right: 45px;">{{answer.votes}}</a>
+
+            <button mat-raised-button color="primary" (click)="addVoteAnswer(answer, 1)">
+              <mat-icon>thumb_up</mat-icon>
+            </button>
+            <button mat-raised-button color="accent" (click)="addVoteAnswer(answer, -1)">
+              <mat-icon>thumb_down</mat-icon>
+            </button>
+          </div>
+
+        </div>
+        <!--end ans-votes-->
+
+        <mat-divider></mat-divider>
+      </mat-list>
+    </ng-container>
+  </ng-container>
+</div>
+<div style="margin-top: 35px;">
+  <a style="cursor: pointer;" (click)="goToQuestion()">Powrót do Questions</a>
+</div>

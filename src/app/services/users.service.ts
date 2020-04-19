@@ -15,7 +15,6 @@ export class UsersService {
 
   }
 
-
   createUser(value) {
     return this.db.collection('users').add({
       username: value.username,
@@ -50,13 +49,13 @@ export class UsersService {
       map(docArray => {
         return docArray.map(doc => {
           return {
+            id: doc.payload.doc.id,
             // tslint:disable-next-line: no-string-literal
             username: doc.payload.doc.data()['username'],
           }; // doc
         });
       })
     );
-    // }
   }
 
 }

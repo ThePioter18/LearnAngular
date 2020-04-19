@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task';
@@ -13,16 +12,12 @@ export class AboutComponent implements OnInit {
 
   tasksDone: Array<Task> = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private tasksService: TasksService) {
-    this.route.params.subscribe(res => console.log(res.id));
+  constructor(private router: Router, private tasksService: TasksService) { }
 
+  ngOnInit() {
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
       this.tasksDone = tasks.filter(t => t.isDone === true);
     });
-  }
-
-  ngOnInit() {
-    // this.tasksService.getTasksListObs().subscribe(res => this.tasksDone = res);
   }
 
   sendMeHome() {

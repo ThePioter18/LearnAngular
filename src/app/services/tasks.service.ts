@@ -58,9 +58,10 @@ export class TasksService {
   }
 
   updateTask(task: Task) {
+
     // Firebase/update
     this.taskDoc = this.db.doc(`tasks/${task.id}`);
-    this.taskDoc.update(task);
+    this.taskDoc.update({ name: task.name, userId: task.userId, created: task.created, isDone: task.isDone });
   }
 
   done(task: Task, index: number) {

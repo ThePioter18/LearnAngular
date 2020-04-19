@@ -13,37 +13,90 @@
       <a routerLink="/home" routerLinkActive="active">Home</a>
     </li>
     <li class="nav-item">
-      <a routerLink="/about/48" routerLinkActive="active">About</a>
-    </li>
-    <li class="nav-item">
-      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/about" routerLinkActive="active">About</a>
     </li>
     <li class="nav-item">
       <a class="question" routerLink="/question" routerLinkActive="active">Q&A about Angular</a>
-
     </li>
+    <!-- <li class="nav-item">
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+    </li> -->
+    <!-- <li class="nav-item" *ngIf="authService.user">
+      <span style="cursor: pointer;" [matMenuTriggerFor]="profile">
+        <ng-container *ngFor="let userL of usersList">
+          <ng-container *ngIf="authService.user && email === userL.emailUser">
+            <span><b>user:</b> {{userL.username}}</span>
+          </ng-container>
+        </ng-container>
+      </span>
+    </li>
+    <mat-menu #profile="matMenu">
+      <div><a routerLink="/profile" routerLinkActive="active">My Profile</a></div>
+
+      <div>
+        <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
+      </div>
+
+    </mat-menu> -->
+
+
     <li class="nav-item">
       <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>
-      <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
-      <span style="margin-left: 50px;">{{user?.email}}</span>
+      <!-- <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a> -->
+      <!-- <span style="margin-left: 50px;">{{user?.email}}</span> -->
 
-      <ng-container *ngFor="let userL of usersList">
+      <!-- <ng-container *ngFor="let userL of usersList">
         <ng-container *ngIf="authService.user && email === userL.emailUser">
           <span style="margin-left: 50px;"><b>username:</b> {{userL.username}}</span>
 
         </ng-container>
-      </ng-container>
+      </ng-container> -->
 
     </li>
 
   </ul>
+
+  <div class="account nav-items main-nav mobile-hide">
+    <li class="nav-item" *ngIf="authService.user">
+      <button class="btn-account" type="button" [matMenuTriggerFor]="profile">
+
+        <mat-icon>account_box</mat-icon>
+      </button>
+
+    </li>
+
+    <mat-menu #profile="matMenu" xPosition="before">
+
+      <ng-container *ngFor="let userL of usersList">
+        <ng-container *ngIf="authService.user && email === userL.emailUser; else !noUser">
+          <span>
+            <mat-icon>person</mat-icon> {{userL.username}}
+          </span>
+        </ng-container>
+        <ng-template #noUser>
+          <span>{{user?.email}}</span>
+        </ng-template>
+      </ng-container>
+
+      <div>
+        <a routerLink="/profile" routerLinkActive="active">My Profile</a>
+      </div>
+
+      <div>
+        <a *ngIf="authService.user" routerLink="/login" (click)="logout()">Wyloguj</a>
+      </div>
+
+    </mat-menu>
+  </div>
+
+
   <ul>
     <mat-menu #menu="matMenu">
       <li class="nav-item">
         <a routerLink="/home" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a routerLink="/about/48" routerLinkActive="active">About</a>
+        <a routerLink="/about" routerLinkActive="active">About</a>
       </li>
       <li class="nav-item">
         <a *ngIf="!authService.user" routerLink="/login" routerLinkActive="active">Zaloguj</a>

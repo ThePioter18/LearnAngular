@@ -11,20 +11,21 @@ export class DoneTaskComponent implements OnInit {
 
   tasksDone: Array<Task> = [];
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService) { }
+
+  ngOnInit() {
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
       this.tasksDone = tasks.filter(t => t.isDone === true);
 
     });
   }
+
   remove(task: Task) {
-    // this.emitRemove.emit(task);
     const response = confirm('Czy na pewno chcesz usunąć?');
     if (response) {
       this.tasksService.remove(task);
     }
   }
-  ngOnInit() {
-  }
+
 
 }

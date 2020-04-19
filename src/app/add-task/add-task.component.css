@@ -8,7 +8,7 @@ input {
   border: 0;
   padding: 0.5em;
   margin-bottom: 0.2em;
-  display: inline;
+  display: inline-block;
 
 }
 

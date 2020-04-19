@@ -3,8 +3,8 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { QuestionDialogComponent } from './question-dialog/question-dialog.component';
-import { Question } from 'src/app/models/question';
-import { AuthService } from 'src/app/auth/auth.service';
+import { Question } from '../../models/question';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-question',

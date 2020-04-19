@@ -47,6 +47,20 @@ nav a.active {
   margin-top: 50px;
 }
 
+.account {
+  margin-left: auto;
+}
+
+.btn-account {
+  border: none;
+  color: #fff;
+  display: inline-block;
+  margin-left: auto;
+  background-color: rgb(142, 128, 206, 0.4);
+  height: 48px;
+  width: 50px;
+}
+
 /* NEW STYLE */
 .burger-icon {
   display: none;

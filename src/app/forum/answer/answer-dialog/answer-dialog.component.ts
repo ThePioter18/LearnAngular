@@ -1,18 +1,18 @@
 import { UsersService } from './../../../services/users.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { Answer } from 'src/app/models/answer';
-import { REPLY } from 'src/app/models/data-answer';
+import { Answer } from '../../../models/answer';
+import { REPLY } from '../../../models/data-answer';
 import { ActivatedRoute } from '@angular/router';
-import { Question } from 'src/app/models/question';
-import { QUERY } from 'src/app/models/data-base';
+import { Question } from '../../../models/question';
+import { QUERY } from '../../../models/data-base';
 
 @Component({
   selector: 'app-answer-dialog',
   templateUrl: './answer-dialog.component.html',
   styleUrls: ['./answer-dialog.component.css']
 })
-export class AnswerDialogComponent {
+export class AnswerDialogComponent implements OnInit {
 
   newAnswer: Answer[] = REPLY;
   questions: Question[] = QUERY;
@@ -25,7 +25,9 @@ export class AnswerDialogComponent {
 
   answer = { idQuestion: this.id, reply: '', authorQuestion: '', authorAnswer: '', votes: 0 };
 
-  constructor(public dialogRef: MatDialogRef<AnswerDialogComponent>, public usersService: UsersService, public route: ActivatedRoute) {
+  constructor(public dialogRef: MatDialogRef<AnswerDialogComponent>, public usersService: UsersService, public route: ActivatedRoute) { }
+
+  ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
       this.id = params.id;

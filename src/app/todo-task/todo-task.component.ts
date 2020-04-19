@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from '../models/task';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
@@ -31,50 +31,50 @@ import { trigger, style, transition, animate, keyframes, query, stagger } from '
     ])
   ]
 })
-export class TodoTaskComponent {
+export class TodoTaskComponent implements OnInit {
 
-  // @Input()
-  // tasksList = [];
-  // @Output()
-  // emitDone = new EventEmitter<string>();
-  // @Output()
-  // emitRemove = new EventEmitter<string>();
   tasksList: Array<Task> = [];
   editState = false;
   taskToEdit: Task;
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService) { }
+
+  ngOnInit() {
     this.tasksService.getTasksListObs().subscribe((tasks: Array<Task>) => {
       this.tasksList = tasks.filter(t => t.isDone === false);
     });
   }
 
   remove(task: Task) {
-    // this.emitRemove.emit(task);
     const response = confirm('Czy na pewno chcesz usunąć?');
     if (response) {
       this.tasksService.remove(task);
     }
   }
+
   editTask(task: Task) {
     this.editState = !this.editState;
     this.taskToEdit = task;
   }
+
   updateTask(task: Task) {
     this.tasksService.updateTask(task);
     this.taskToEdit = null;
     this.editState = false;
   }
+
   done(task: Task, index: number) {
-    // this.emitDone.emit(task);
     this.tasksService.remove(task);
     this.tasksService.done(task, index);
 
   }
+
   getColor(): string {
     return this.tasksList.length >= 5 ? '#dc3545' : '#28a745';
   }
+
   getShadow(): string {
     return '0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12)';
   }
+
 }

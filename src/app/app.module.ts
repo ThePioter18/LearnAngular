@@ -25,11 +25,12 @@ import { QuestionComponent } from './forum/question/question.component';
 import { AnswerComponent } from './forum/answer/answer.component';
 import { QuestionDialogComponent } from './forum/question/question-dialog/question-dialog.component';
 
+/* Firebase */
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-/*Angular Material*/
+/* Angular Material */
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
@@ -42,6 +43,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { AnswerDialogComponent } from './forum/answer/answer-dialog/answer-dialog.component';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   {
@@ -56,7 +58,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'about/:id',
+    path: 'about',
     component: AboutComponent
   },
   {
@@ -69,7 +71,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserComponent
+    component: UserComponent,
   },
   {
     path: 'profile',
@@ -86,17 +88,6 @@ const routes: Routes = [
     component: AnswerComponent
   }
 ];
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyA9cvWDCklxsvY98XIkAJleJXJpaPkw1HA',
-  authDomain: 'auth-d17ed.firebaseapp.com',
-  databaseURL: 'https://auth-d17ed.firebaseio.com',
-  projectId: 'auth-d17ed',
-  storageBucket: 'auth-d17ed.appspot.com',
-  messagingSenderId: '499652368751',
-  appId: '1:499652368751:web:08c8150934ffca5ddf709a',
-  measurementId: 'G-93CGVYFF7X'
-};
 
 @NgModule({
   declarations: [
@@ -122,12 +113,13 @@ const firebaseConfig = {
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    BrowserAnimationsModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
 
     FormsModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatCardModule,

@@ -1,8 +1,8 @@
 import { UsersService } from './../../../services/users.service';
 import { QUERY } from '../../../models/data-base';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Question } from 'src/app/models/question';
+import { Question } from '../../../models/question';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './question-dialog.component.html',
   styleUrls: ['./question-dialog.component.css']
 })
-export class QuestionDialogComponent {
+export class QuestionDialogComponent implements OnInit {
   newQuestion: Question[] = QUERY;
 
   name: Array<{ username: string; }> = [];
@@ -18,7 +18,9 @@ export class QuestionDialogComponent {
   id: number;
   question = { idQuestion: this.id, query: '', author: '', votes: 0, answer: 0 };
 
-  constructor(public dialogRef: MatDialogRef<QuestionDialogComponent>, public usersService: UsersService, public route: ActivatedRoute) {
+  constructor(public dialogRef: MatDialogRef<QuestionDialogComponent>, public usersService: UsersService, public route: ActivatedRoute) { }
+
+  ngOnInit() {
 
     this.id = this.newQuestion.filter(f => f.idQuestion).length + 1;
 

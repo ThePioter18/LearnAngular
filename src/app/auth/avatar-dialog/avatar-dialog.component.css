@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.select {
+  margin-bottom: 10px;
+}
+
+.material-icons.color_yellow {
+  font-size: 20px;
+}
+
+.info-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  padding: 4px;
+  border-radius: 4px;
+}

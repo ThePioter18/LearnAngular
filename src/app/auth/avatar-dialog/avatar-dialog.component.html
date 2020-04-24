@@ -1,0 +1,61 @@
+<div>
+  <div class="row">
+    <div class="col-md-12 select">
+      <h5>Select Avatar</h5>
+
+      <ng-container *ngIf="clickSelectFile===false; else noSrc">
+
+        <ng-container *ngIf="clickSelectFile===false; else clickSelectFile">
+          <img [src]="url" height="128">
+        </ng-container>
+        <ng-template #clickSelectFile>
+          <input #form type='file' (change)="onSelectFile($event)">
+        </ng-template>
+
+      </ng-container>
+
+      <ng-template #noSrc>
+
+        <ng-container *ngIf="clickSelectFile===true && clickSave===false; else addAvatar">
+
+          <ng-container *ngIf="wrongFile; else clickSelectFile">
+            <label *ngIf="wrongFile" class="alert alert-danger">
+              <mat-icon>priority_hight</mat-icon>
+              {{wrongFile}}
+            </label>
+          </ng-container>
+
+          <ng-template #clickSelectFile>
+            <img [src]="url" height="128">
+
+            <button mat-raised-button color="primary" [disabled]="clickSelectFile===false && clickSave===true"
+              (click)="save($event)">Zapisz</button>
+
+          </ng-template>
+
+        </ng-container>
+        <ng-template #addAvatar>
+          <label class="alert alert-success">Dodano avatar do listy.</label>
+
+        </ng-template>
+      </ng-template>
+
+
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="close()">Zamknij</button>
+
+    </div>
+  </div>
+
+  <div class="avatar-container">
+    <label class="subtitle">Wybierz interesujący Cię avatar.</label>
+    <div *ngFor="let avatar of avatars">
+      <img class="img-thumbnail" [src]=avatar.avatar width="128" height="128" (click)="close(avatar)">
+      <button mat-raised-button color="accent" title="delete" (click)="removeImg(avatar)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+</div>

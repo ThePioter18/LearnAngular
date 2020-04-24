@@ -1,9 +1,20 @@
 <div class="main-div">
-  <mat-card>
+  <mat-card class="profile-card">
     <ng-container *ngFor="let userL of userList">
       <ng-container *ngIf="authService.user && authService.user.email === userL.emailUser">
         <h4>My profile</h4>
         <mat-list role="list">
+          <div class="img-container" *ngIf="userL.avatar; else loading">
+            <mat-list-item role="listitem"><b>Photo: </b> </mat-list-item><img class="img-avatar" src="{{userL.avatar}}"
+              width="128">
+          </div>
+          <ng-template #loading>
+            <div class="container-circle">
+              <div class="circle">
+                <mat-icon class="person-icon">person</mat-icon>
+              </div>
+            </div>
+          </ng-template>
           <mat-list-item role="listitem"><b>Username: </b> </mat-list-item>{{ userL.username}}
           <mat-list-item role="listitem"><b>Email: </b> </mat-list-item>{{ userL.emailUser}}
           <mat-list-item role="listitem"><b>Age: </b> </mat-list-item>{{ userL.age}} lat

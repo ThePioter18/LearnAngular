@@ -5,7 +5,21 @@
     <mat-card-title>Create User</mat-card-title>
 
     <mat-card-content>
+      <div class="img-container" *ngIf="avatarLink!==''; else loading">
 
+        <img class=" img-avatar" src="{{avatarLink}}">
+
+      </div>
+      <ng-template #loading>
+        <div class="container-circle">
+          <div class="circle">
+            <mat-icon class="person-icon">person</mat-icon>
+          </div>
+        </div>
+      </ng-template>
+
+      <button mat-stroked-button class="change-img-button" color="primary" (click)="openDialog()">Change
+        Image</button>
       <form class="create-form" [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)">
 
         <div class="form-group">

@@ -2,6 +2,8 @@ import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { AvatarDialogComponent } from '../avatar-dialog/avatar-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -11,6 +13,7 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
 
   exampleForm: FormGroup;
+  avatarLink = '';
 
   validationMessages = {
     username: [{
@@ -23,10 +26,11 @@ export class UserComponent implements OnInit {
     }]
   };
 
-  constructor(private fb: FormBuilder, private router: Router, public usersService: UsersService) { }
+  constructor(private fb: FormBuilder, private router: Router, public usersService: UsersService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.createForm();
+    console.log(this.avatarLink);
   }
 
   createForm() {
@@ -36,6 +40,18 @@ export class UserComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(AvatarDialogComponent, {
+      height: '400px',
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.avatarLink = result.avatar;
+      }
+    });
+  }
 
   resetFields() {
     this.exampleForm = this.fb.group({
@@ -45,7 +61,7 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(value) {
-    this.usersService.createUser(value).then(res => {
+    this.usersService.createUser(value, this.avatarLink).then(() => {
       this.resetFields();
       this.router.navigate(['/home']);
     });

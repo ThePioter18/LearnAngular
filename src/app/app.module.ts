@@ -41,9 +41,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material';
 import { AnswerDialogComponent } from './forum/answer/answer-dialog/answer-dialog.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
+import { AvatarDialogComponent } from './auth/avatar-dialog/avatar-dialog.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,7 @@ const routes: Routes = [
     AnswerComponent,
     QuestionDialogComponent,
     AnswerDialogComponent,
+    AvatarDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' }),
@@ -137,7 +139,8 @@ const routes: Routes = [
   bootstrap: [AppComponent],
   entryComponents: [
     QuestionDialogComponent,
-    AnswerDialogComponent
+    AnswerDialogComponent,
+    AvatarDialogComponent
   ]
 
 })

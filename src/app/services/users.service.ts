@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
@@ -9,20 +9,47 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class UsersService {
+  avatarDoc: AngularFirestoreDocument<any>;
 
   constructor(private authService: AuthService, private db: AngularFirestore, public angularFire: AngularFireAuth) {
     this.getUsers();
 
   }
+  getAvatars() {
+    return this.db.collection('/avatars').snapshotChanges().pipe(
+      map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            // tslint:disable-next-line: no-string-literal
+            avatar: doc.payload.doc.data()['avatar']
+          }; // doc
+        });
+      })
+    );
+  }
 
-  createUser(value) {
+  addAvatar(value) {
+    return this.db.collection('avatars').add({
+      avatar: value,
+    });
+  }
+  removeAvatar(value) {
+    // Firebase/remove
+    this.avatarDoc = this.db.doc(`avatars/${value.id}`);
+    this.avatarDoc.delete();
+  }
+
+  createUser(value, avatar) {
     return this.db.collection('users').add({
       username: value.username,
       age: value.age,
-      emailUser: this.authService.user.email
+      emailUser: this.authService.user.email,
+      avatar
     });
   }
-  getUsers(): Observable<{ username: string; age: number; emailUser: string }[]> {
+
+  getUsers(): Observable<{ username: string; age: number; emailUser: string, avatar: string }[]> {
 
     return this.db.collection('users').snapshotChanges().pipe(
       map(docArray => {
@@ -34,7 +61,9 @@ export class UsersService {
             // tslint:disable-next-line: no-string-literal
             age: doc.payload.doc.data()['age'],
             // tslint:disable-next-line: no-string-literal
-            emailUser: doc.payload.doc.data()['emailUser']
+            emailUser: doc.payload.doc.data()['emailUser'],
+            // tslint:disable-next-line: no-string-literal
+            avatar: doc.payload.doc.data()['avatar']
           }; // doc
         });
       })

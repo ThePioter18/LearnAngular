@@ -1,0 +1,24 @@
+.profile-card {
+  height: 32rem;
+}
+
+.container-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background: #63c1dd;
+  border-radius: 50%
+}
+
+.person-icon {
+  font-size: 100px;
+}
+
+.mat-icon {
+  width: 100px;
+}

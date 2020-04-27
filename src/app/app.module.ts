@@ -24,27 +24,17 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { QuestionComponent } from './forum/question/question.component';
 import { AnswerComponent } from './forum/answer/answer.component';
 import { QuestionDialogComponent } from './forum/question/question-dialog/question-dialog.component';
+import { AnswerDialogComponent } from './forum/answer/answer-dialog/answer-dialog.component';
+import { AvatarDialogComponent } from './auth/avatar-dialog/avatar-dialog.component';
 
 /* Firebase */
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 /* Angular Material */
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatIconModule } from '@angular/material';
-import { MatStepperModule } from '@angular/material/stepper';
-
-import { MatDialogModule } from '@angular/material';
-import { AnswerDialogComponent } from './forum/answer/answer-dialog/answer-dialog.component';
-import { environment } from '../environments/environment';
-import { AvatarDialogComponent } from './auth/avatar-dialog/avatar-dialog.component';
+import { MaterialModule } from './material.module';
 
 const routes: Routes = [
   {
@@ -124,18 +114,8 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatCardModule,
-    MatDividerModule,
-    MatListModule,
-    MatInputModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTabsModule,
-    MatIconModule,
-    MatStepperModule,
-    MatDialogModule
+    MaterialModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
     QuestionDialogComponent,

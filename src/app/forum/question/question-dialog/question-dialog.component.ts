@@ -1,7 +1,7 @@
 import { UsersService } from './../../../services/users.service';
 import { QUERY } from '../../../models/data-base';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material';
 import { Question } from '../../../models/question';
 import { ActivatedRoute } from '@angular/router';
 

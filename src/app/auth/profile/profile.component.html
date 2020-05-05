@@ -19,6 +19,30 @@
           <mat-list-item role="listitem"><b>Email: </b> </mat-list-item>{{ userL.emailUser}}
           <mat-list-item role="listitem"><b>Age: </b> </mat-list-item>{{ userL.age}} lat
         </mat-list>
+
+        <button mat-raised-button matTooltip="delete forever account" class="btn-switch" (click)="onSwitch()">
+          <mat-icon class="delete-forever">delete_forever</mat-icon>
+        </button>
+
+        <div class="edit-panel" [class.drawer-panel]="show">
+          <div class="panel-delete"></div>
+        </div>
+
+        <div class="edit-btn" [class.show-btn]="show">
+
+          <div class="container-password">
+            <mat-form-field>
+              <input matInput placeholder="current password" [(ngModel)]="currentPassword" type="password"
+                name="password" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="deleteAccount(userL, currentPassword)">OK
+            </button>
+          </div>
+
+
+        </div>
+
+
       </ng-container>
     </ng-container>
   </mat-card>

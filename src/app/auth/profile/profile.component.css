@@ -17,8 +17,30 @@
 
 .person-icon {
   font-size: 100px;
+  width: 100px;
 }
 
-.mat-icon {
-  width: 100px;
+.panel-delete {
+  width: 288px;
+  height: 60px;
+  background-color: #fff;
+
+  border-radius: 4px;
+
+}
+
+.delete-forever {
+  width: 34px;
+}
+
+.btn-switch {
+  display: flex;
+  margin-top: 15px;
+
+}
+
+.container-password {
+  margin-left: 24px;
+  position: relative;
+  bottom: 50px;
 }

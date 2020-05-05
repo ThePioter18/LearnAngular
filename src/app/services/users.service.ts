@@ -9,12 +9,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class UsersService {
-  avatarDoc: AngularFirestoreDocument<any>;
+  documentFire: AngularFirestoreDocument<any>;
 
   constructor(private authService: AuthService, private db: AngularFirestore, public angularFire: AngularFireAuth) {
     this.getUsers();
 
   }
+
   getAvatars() {
     return this.db.collection('/avatars').snapshotChanges().pipe(
       map(docArray => {
@@ -36,8 +37,8 @@ export class UsersService {
   }
   removeAvatar(value) {
     // Firebase/remove
-    this.avatarDoc = this.db.doc(`avatars/${value.id}`);
-    this.avatarDoc.delete();
+    this.documentFire = this.db.doc(`avatars/${value.id}`);
+    this.documentFire.delete();
   }
 
   createUser(value, avatar) {

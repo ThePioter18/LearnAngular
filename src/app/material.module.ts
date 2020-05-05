@@ -9,7 +9,9 @@ import {
     MatButtonModule,
     MatTabsModule,
     MatStepperModule,
-    MatDialogRef
+    MatDialogRef,
+    MatTooltipModule
+
 } from '@angular/material';
 
 const myMaterialModule = [
@@ -22,7 +24,8 @@ const myMaterialModule = [
     MatStepperModule,
     MatIconModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
 ];
 
 @NgModule({
